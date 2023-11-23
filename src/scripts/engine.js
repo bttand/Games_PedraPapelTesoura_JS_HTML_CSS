@@ -1,10 +1,24 @@
-let options = ["✌🏻", "🖐🏻", "✊🏻"];
+let options = [
+    {
+        text: "✌🏻",
+        color: 'rgb(214, 114, 114)',
+    },
+    {
+        text: "🖐🏻",
+        color: 'rgb(199, 212, 145)',
+    },
+    {
+        text: "✊🏻",
+        color: 'rgb(115, 142, 201)',
+    }
+];
 
 function createOptions(field) {
     for (let i = 0; i < options.length; i++) {
         let card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = options[i];
+        card.innerHTML = options[i].text;
+        card.style.backgroundColor = options[i].color;
         card.id = `${i}`;
         document.querySelector(field).appendChild(card);
         if (field === '#player-cards') {
@@ -45,7 +59,7 @@ function removeAll() {
 
 function updateScore(value) {
     if (value === 1) {
-        score.innerText = `Win: ${playerScore} | Lose: ${computerScore}`;
+        score.innerText = `Win: ${playerScore}  Lose: ${computerScore}`;
     } 
     if (value === 2){
         score.innerText = "Draw";
@@ -84,9 +98,11 @@ function setCardInfield() {
     let getRandomId = Math.floor(Math.random() * 3);
     playerCard.className = this.className;
     playerCard.innerHTML = this.innerHTML;
+    playerCard.style.backgroundColor = this.style.backgroundColor;
     playerCard.id = this.id;
     computerCard.className = 'card';
-    computerCard.innerHTML = options[getRandomId];
+    computerCard.innerHTML = options[getRandomId].text;
+    computerCard.style.backgroundColor = options[getRandomId].color;
     this.remove();
     child = document.querySelector('#computer-cards>.card');
     child.remove();
